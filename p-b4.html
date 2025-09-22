@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>MARCA - Diario online líder en información deportiva</title>
+    <link rel="icon" href="imagenes/logo_m1.png" type="image/png" sizes="8x8">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            padding-top: 10px;
+        }
+
+        .scroll-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .scroll-x::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container-fluid {
+            overflow-x: hidden;
+        }
+
+        #marcaBar {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 1031;
+            background-color: #ffffff;
+        }
+
+        #marcaBar.hidden {
+            opacity: 0;
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        #mainNavbar {
+            transition: background-color 0.3s ease;
+            /* Se usará la clase 'scrolled' para el cambio de color */
+        }
+
+        #mainNavbar.scrolled {
+            background-color: rgb(216, 39, 39) !important;
+        }
+
+        #extraButtons {
+            display: flex;
+            margin-left: auto;
+        }
+
+        #extraButtons.hidden {
+            display: none !important;
+        }
+
+        #extraButtons .btn {
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+
+        .dropdown-menu {
+            z-index: 1050 !important;
+            /* Asegura que esté por encima de cualquier navbar de Bootstrap */
+        }
+    </style>
+</head>
+
+<body>
+    <!--Barra MARCA-->
+    <div class="container-fluid py-1 px-4" id="marcaBar">
+        <div class="row align-items-center">
+            <!-- Columna izquierda -->
+            <div class="d-flex align-items-center justify-content-start flex-nowrap">
+                <a href="#"
+                    class="d-flex align-items-center mr-2 ml-0 ml-md-5 text-decoration-none text-dark border-right flex-shrink-0">
+                    <img class="mr-2" src="imagenes/la_portada_de_hoy.jpg" alt="..."
+                        style="min-height: 35px; max-height: 50px;">
+                    <span class="d-none d-xl-block ml-2 mr-lg-3 ml-md-0 font-weight-bold">La portada de hoy</span>
+                </a>
+                <a href="#"
+                    class="d-flex align-items-center mr-2 text-decoration-none text-dark border-right flex-shrink-0">
+                    <img class="mr-2" src="imagenes/RadioMARCA.svg.png" alt="..."
+                        style="min-height: 35px; max-height: 50px;">
+                    <span class="d-none d-xl-block ml-2 mr-lg-3 font-weight-bold">Radio Marca</span>
+                </a>
+                <a href="#" class="d-flex align-items-center mr-2 text-decoration-none text-dark flex-shrink-0">
+                    <img class="ml-0" src="imagenes/images.png" alt="..." style="min-height: 35px; max-height: 50px;">
+                    <span class="d-none d-xl-block ml-1 font-weight-bold">Laliga Fantasy MARCA</span>
+                </a>
+            </div>
+
+            <!-- Columna central (logo) -->
+            <div class="mx-sm-auto flex-shrink-0">
+                <a href="#">
+                    <img src="imagenes/marca-logo.png" alt="Logo Marca" class="img-fluid d-block mx-sm-auto"
+                        style="max-width: 150px; height: auto;">
+                </a>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="d-flex flex-nowrap ml-auto align-items-center justify-content-end">
+                <div class="btn-group mr-2 d-sm-block">
+                    <button type="button" class="btn btn-light dropdown-toggle px-0 px-lg-2 border"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="imagenes/bandera.png" alt="ES" style="width: 20px; height: auto;">
+                        <span class="d-none d-md-inline ml-1">ES</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Español</a>
+                        <a class="dropdown-item" href="#">Ingles</a>
+                        <a class="dropdown-item" href="#">Brasileiro</a>
+                        <a class="dropdown-item" href="#">Exento?</a>
+                    </div>
+                </div>
+                <button id="btn-suscribir-top" class="btn btn-danger font-weight-bold mr-2 px-lg-3 flex-shrink-0">
+                    <span class="d-none d-xl-inline">Suscríbete</span>
+                    <span class="d-lg-inline d-xl-none">S</span>
+                </button>
+                <button id="btn-iniciar-top"
+                    class="btn btn-light text-danger font-weight-bold px-lg-3 border mr-lg-1 mr-xl-3 flex-shrink-0">
+                    <span class="d-none d-xl-inline">Iniciar sesión</span>
+                    <span class="d-lg-inline d-xl-none">I</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--Navbar-->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+        <a class="navbar-brand d-none p-0" href="#" id="navbarLogo">
+            <img src="imagenes/Captura1.png" alt="logo M" style="height: 40px; width: auto;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Fútbol
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Baloncesto
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Motor
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Polideportivo
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Exento :D?</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Más + <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left mr-2">
+                <div class="input-group bg-white">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <div class="input-group-append">
+                        <button class="btn" type="submit" style="background-color: transparent; color: black;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="mx-auto d-flex hidden" id="extraButtons">
+                <!-- Los botones se insertarán aquí dinámicamente -->
+            </div>
+        </div>
+    </nav>
+
+    <!--Logos de clubs-->
+    <div class="container-fluid px-5" style="background-color: rgb(240, 238, 238);">
+        <div class="d-flex flex-row flex-nowrap scroll-x py-2 px-md-5">
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/alaves.png" alt="Barcelona Club" style="height: 60px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/athletic.png" alt="Barcelona Club" style="height: 60px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/atlmadrid.png" alt="Barcelona Club" style="height: 50px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/Logo-Barcelona1.png" alt="Barcelona Club" style="height: 40px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/elche.png" alt="Barcelona Club" style="height: 60px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/mallorca.png" alt="Barcelona Club" style="height: 65px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/olympiacos.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/villarreal.png" alt="Barcelona Club" style="height: 65px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/psg.png" alt="Barcelona Club" style="height: 55px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/red_bull_salzburgo.png" alt="Barcelona Club" style="height: 60px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/realoviedo.png" alt="Barcelona Club" style="height: 60px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/levante.png" alt="Barcelona Club" style="height: 55px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/guadalajara.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/rayovallecano.png" alt="Barcelona Club" style="height: 52px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/realmadrid.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/osasuna.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/sevilla.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/realsociedad.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/necaxa.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <button class="btn rounded-circle d-flex justify-content-center align-items-center mx-2 my-1 mr-5"
+                style="background-color: transparent; width: 40px; height: 40px; flex: 0 0 auto;">
+                <img src="imagenes/valencia.png" alt="Barcelona Club" style="height: 57px;">
+            </button>
+            <img src="imagenes/marcas-apuestas.png" alt="..." class="ml-5 p-0" style="height: 50px;">
+        </div>
+    </div>
+
+    <!--GIF-->
+    <div class="container align-items-center text-center">
+        <img src="imagenes/12-DE-SEP-2-Futbolsapiens.gif" alt="GIF Deportivo" class="img-fluid mt-3"
+            style="width: 700px; height: auto;">
+    </div>
+
+    <!--Agenda-->
+    <div class="container my-5 px-3">
+        <div class="d-flex flex-column justify-content-between align-items-start">
+            <div class="d-flex flex-sm-column flex-column flex-xl-row align-items-start">
+                <h3 class=" mb-sm-0 mb-2 mr-4 mb-sm-2">Agenda</h3>
+
+                <div class="d-flex flex-sm-row mb-2 mr-sm-4">
+                    <div class="bg-danger text-white d-flex align-items-center justify-content-center px-3 flex-shrink-0"
+                        style="height: 50px;">
+                        <strong>En directo</strong>
+                    </div>
+                    <div class="py-1 pl-3 pr-5 d-flex align-items-center justify-content-center flex-shrink-0 "
+                        style="background-color: rgb(221, 218, 218); height: 50px;">
+                        <a href="#" class="text-dark">
+                            <small class="d-block">Todas las noticias</small>
+                            <strong class="mr-5 mr-sm-0">Última hora</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-sm-row mb-2 mr-5">
+                    <div class="bg-danger text-white d-flex align-items-center justify-content-center px-3 flex-shrink-0"
+                        style="width: 130px; height: 50px;">
+                        <strong class="text-center">Lo mejor del día</strong>
+                    </div>
+                    <div class="py-1 pl-3 pr-5 d-flex align-items-center justify-content-center flex-shrink-0"
+                        style="background-color: rgb(221, 218, 218); height: 50px;">
+                        <a href="#" class="text-dark">
+                            <small class="d-block">Agenda</small>
+                            <strong class="mr-5">Jueves 23</strong>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex mt-sm-0">
+                    <a href="#" class="text-dark">Ver más directos </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Noticias-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 mb-5 mb-md-3 position-relative">
+                <article class="card card-full text-light border-0">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <a href="#">
+                            <img src="imagenes/champions.jpg" class="card-img mb-3 mb-md-0" alt="Noticia principal">
+                        </a>
+                        <div class="card-text small text-muted">
+                            <a>RUBÉN JIMENEZ ENRIQUE MEDINA</a>
+                        </div>
+                        <div class="position-absolute small text-danger font-weight-bold"
+                            style="bottom: 0; right: 0; padding: 0.rem 1rem;">
+                            <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                            <a>468</a>
+                        </div>
+                        <div class="position-absolute p-3 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">CHAMPIONS</a>
+                        </div>
+                        <div class="position-absolute p-3 b-0 w-100 bg-lg-shadow" style="bottom: 0;">
+                            <h5 class="text-white">Descubre a los ocho grandes favoritos</h5>
+                            <h2 class="h1-sm h2-md p-sm-3 p-md-0 display-4-lg fw-bold heading-letter-space">
+                                <a class="text-white" href="#">¿Cuál es el mejor once para reinar en Europa?</a>
+                            </h2>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 d-flex flex-column h-100">
+                <article class="card card-full mb-5 mb-md-3 border-0">
+                    <div class="row no-gutters" style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <div class="col-md-6 mb-2">
+                            <a href="#">
+                                <img src="imagenes/huelga.jpg" class="img-fluid" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body pt-0">
+                                <small class="text-primary font-weight-bold">LALIGA SANTANDER</small>
+                                <p class="font-weight-bold mb-0">
+                                    <a href="#" class="text-dark">Amenaza de huelga</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-text small text-muted">
+                            <a>A. MONGOLO Y EL BORDA</a>
+                        </div>
+                    </div>
+                    <div class="position-absolute small text-danger font-weight-bold"
+                        style="bottom: 0; right: 0; padding: 0.01rem 1rem;">
+                        <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                        <a>306</a>
+                    </div>
+                </article>
+                <article class="card card-full mb-5 mb-md-3 border-0">
+                    <div class="row no-gutters" style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <div class="col-md-6 mb-md-1">
+                            <a href="#">
+                                <img src="imagenes/felipe.jpg" class="img-fluid" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body pt-0">
+                                <small class="text-danger font-weight-bold">FICHAJES</small>
+                                <p class="font-weight-bold mb-0">
+                                    <a href="#" class="text-dark">El 'recambio' de Felipe Luis puede llegar de
+                                        Alemania</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute small text-danger font-weight-bold"
+                        style="bottom: 0; right: 0; padding: 0.01rem 1rem;">
+                        <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                        <a>92</a>
+                    </div>
+                </article>
+                <article class="card card-full mb-4 mb-md-3 border-0">
+                    <div class="row no-gutters" style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <div class="col-md-6">
+                            <a href="#">
+                                <img src="imagenes/portero.jpg" class="img-fluid" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body pt-0">
+                                <small class="text-info font-weight-bold">REAL MADRID</small>
+                                <p class="font-weight-bold mb-0">
+                                    <a href="#" class="text-dark">Champions y Liga para el portero titular</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-text small text-muted">
+                            <a>JOSÉ FELIX DÍAZ</a>
+                        </div>
+                    </div>
+                    <div class="position-absolute small text-danger font-weight-bold"
+                        style="bottom: 0; right: 0; padding: 0.01rem 1rem;">
+                        <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                        <a>207</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-md-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <a href="#">
+                            <img src="imagenes/felix.jpg" class="img-fluid" alt="Noticia">
+                        </a>
+                        <div class="position-absolute p-1 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">FÚTBOL</a>
+                        </div>
+                        <div class="card-body border-top p-1">
+                            <h5 class="card-title fw-bold mb-3 mb-lg-5 mb-md-4">
+                                <a class="text-dark" href="#">Felix Orode, el jugador nugeriano que explica el festejo
+                                    de Dele Alli</a>
+                            </h5>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-2 mt-md-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <a href="#">
+                            <img src="imagenes/cristinao.jpg" class="img-fluid" alt="Noticia">
+                        </a>
+                        <div class="position-absolute p-1 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">SERIE A</a>
+                        </div>
+                        <div class="card-body border-top p-1">
+                            <h5 class="card-title fw-bold mb-4">
+                                <a class="text-dark" href="#">Cristiano habla sobre Cuadrado y la cesión del número
+                                    7</a>
+                            </h5>
+                        </div>
+                        <div class="card-text text-muted small">
+                            <a>REDACCIÓN MARCA CLARO</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <a href="#">
+                            <img src="imagenes/cruz.jpeg" class="img-fluid" alt="Noticia">
+                        </a>
+                        <div class="position-absolute p-1 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">MÉXICO</a>
+                        </div>
+                        <div class="card-body border-top p-1">
+                            <h5 class="card-title fw-bold mb-xl-4 mb-lg-5 mb-md-4">
+                                <a class="text-dark" href="#">La joya celeste que hacer soñar a Cruz Azul</a>
+                            </h5>
+                        </div>
+                        <div class="card-text text-muted small">
+                            <a>JAVIER CARDOSO</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!--En noticia-->
+    <div class="container my-3">
+        <hr class="border-secondary">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-auto mb-2 mb-md-0">
+                <h6 class="font-weight-bold mb-0">En noticia:</h6>
+            </div>
+
+            <!-- Enlaces -->
+            <div class="col d-flex flex-column flex-md-row">
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Mercado de fichajes</a>
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Rodrigo</a>
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Fernando Alonso</a>
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Lewandowski</a>
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Usain Bolt</a>
+                <a href="#" class="text-dark mr-md-3 mb-2 mb-md-0">Donald Trump</a>
+                <a href="#" class="text-dark mb-2 mb-md-0">Calendario Liga</a>
+            </div>
+        </div>
+        <hr class="border-secondary">
+    </div>
+
+    <!--Noticias2-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 col-md-12 mt-2">
+                <article class="card card-full mb-3 border-0">
+                    <div class="row no-gutters" style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <div class="col-md-6 mb-0 mb-md-4">
+                            <a href="#">
+                                <img src="imagenes/afe.jpg" class="img-fluid" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body pt-0 pb-0">
+                                <small class="text-primary font-weight-bold">LALIGA SANTANDER</small>
+                                <p class="font-weight-bold mb-0 p-1 p-sm-0">
+                                    <a href="#" class="text-dark">¿Qué equipos y qué jugadores estuvieron en la reunión
+                                        de la AFE?</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute small text-danger font-weight-bold"
+                        style="bottom: 0; right: 0; padding: 0.01rem 1rem;">
+                        <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                        <a>14</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 mt-2">
+                <article class="card card-full mb-3 border-0">
+                </article>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 mt-1">
+                <article class="card card-full mb-3 border-0">
+                    <div class="row no-gutters" style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <div class="col-md-6 mb-md-4 mb-0">
+                            <a href="#">
+                                <img src="imagenes/draxler.jpg" class="img-fluid" alt="...">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body pt-0 pb-0">
+                                <small class="text-primary font-weight-bold">SEVILLA FC</small>
+                                <p class="font-weight-bold mb-0 p-0">
+                                    <a href="#" class="text-dark">Draxler y Martial, nombres 'top' en la recta final del
+                                        mercado</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-text text-muted small">
+                            <a>ROCIO GUEVARA SEVILLA</a>
+                        </div>
+                    </div>
+                    <div class="position-absolute small text-danger font-weight-bold"
+                        style="bottom: 0; right: 0; padding: 0.01rem 1rem;">
+                        <i class="bi bi-chat-dots mr-1 text-dark"></i>
+                        <a>64</a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-md-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 90%;">
+                        <a href="#">
+                            <img src="imagenes/lunin.jpg" class="img-fluid" alt="Noticia">
+                        </a>
+                        <div class="position-absolute p-1 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">REAL MADRID</a>
+                        </div>
+                        <div class="card-body border-top p-1">
+                            <h5 class="card-title fw-bold mb-3 mb-lg-4 mb-sm-5">
+                                <a class="text-dark" href="#">Lunin, muy cerca de irse cedido al Leganés</a>
+                            </h5>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-2 mt-md-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                    <div style="border-bottom: 1px solid #b4b2b2; width: 100%;">
+                        <a href="#">
+                            <img src="imagenes/rodrigo.jpeg" class="img-fluid" alt="Noticia">
+                        </a>
+                        <div class="position-absolute p-1 t-0 w-100" style="top: 0;">
+                            <a href="#" class="p-1 badge badge-primary">REAL MADRID</a>
+                        </div>
+                        <div class="card-body border-top p-1">
+                            <h5 class="card-title fw-bold mb-4">
+                                <a class="text-dark" href="#">Algo pasa con Rodrigo</a>
+                            </h5>
+                        </div>
+                        <div class="card-text text-muted small">
+                            <a>REDACCIÓN MARCA CLARO</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-4 mt-3 mb-3 position-relative">
+                <article class="card card-full text-light border-0 mb-3">
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer class="text-light py-4" style="background-color: black;">
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <h6 class="font-weight-bold">Otras webs de Unidad Editorial</h6>
+                    <hr class="border-secondary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6 class="font-weight-bold d-block d-md-none" data-toggle="collapse" data-target="#lista1"
+                        aria-expanded="false" aria-controls="lista1">
+                        Resultados deportivos <span class="ml-2">&#9662;</span>
+                    </h6>
+                    <h6 class="font-weight-bold d-none d-md-block">Resultados deportivos</h6>
+                    <ul id="lista1" class="list-unstyled collapse d-md-block">
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Clasificación LALIGA</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Calendario LALIGA</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Clasificación Segunda</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Calendario Champions</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Calendario F1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-light" href="#">
+                                <span>Calendario MotoGP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h6 class="font-weight-bold d-block d-md-none" data-toggle="collapse" data-target="#lista2"
+                        aria-expanded="false" aria-controls="lista2">
+                        Información deportiva <span class="ml-2">&#9662;</span>
+                    </h6>
+                    <h6 class="font-weight-bold d-none d-md-block">Información deportiva</h6>
+                    <ul id="lista2" class="list-unstyled collapse d-md-block">
+                        <li><a href="#" class="text-light">LALIGA EA Sports</a></li>
+                        <li><a href="#" class="text-light">LALIGA Hypermotion</a></li>
+                        <li><a href="#" class="text-light">Liga F</a></li>
+                        <li><a href="#" class="text-light">Champions League</a></li>
+                        <li><a href="#" class="text-light">Fórmula 1</a></li>
+                        <li><a href="#" class="text-light">Gaming</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-3">
+                    <h6 class="font-weight-bold d-block d-md-none" data-toggle="collapse" data-target="#lista3"
+                        aria-expanded="false" aria-controls="lista3">
+                        Ocio y Entretenimiento <span class="ml-2">&#9662;</span>
+                    </h6>
+                    <h6 class="font-weight-bold d-none d-md-block">Ocio y Entretenimiento</h6>
+                    <ul id="lista3" class="list-unstyled collapse d-md-block">
+                        <li><a href="#" class="text-light">Tiramillas</a></li>
+                        <li><a href="#" class="text-light">Bienestar</a></li>
+                        <li><a href="#" class="text-light">Lotería</a></li>
+                        <li><a href="#" class="text-light">CuídatePlus</a></li>
+                        <li><a href="#" class="text-light">Cooking Recetas</a></li>
+                        <li><a href="#" class="text-light">Comprobar Lotería Navidad</a></li>
+                        <li><a href="#" class="text-light">Traductor</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-3 mb-3">
+                    <h6 class="font-weight-bold d-block d-md-none" data-toggle="collapse" data-target="#lista4"
+                        aria-expanded="false" aria-controls="lista4">
+                        Unidad Editorial <span class="ml-2">&#9662;</span>
+                    </h6>
+                    <h6 class="font-weight-bold d-none d-md-block">Unidad Editorial</h6>
+                    <ul id="lista4" class="list-unstyled collapse d-md-block">
+                        <li><a href="#" class="text-light">Unidad Editorial</a></li>
+                        <li><a href="#" class="text-light">Expansión</a></li>
+                        <li><a href="#" class="text-light">El Mundo</a></li>
+                        <li><a href="#" class="text-light">Moda - Telva</a></li>
+                        <li><a href="#" class="text-light">El Mundo América</a></li>
+                        <li><a href="#" class="text-light">Diario Médico</a></li>
+                        <li><a href="#" class="text-light">Conversor de moneda</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sub-footer -->
+    <div class="bg-light text-dark py-4 border-top">
+        <div class="container text-center">
+            <p class="mb-1">
+                <strong>© Septiembre 2025 Unidad Editorial Información Deportiva, S.L.U. Todos los derechos
+                    reservados.</strong>
+            </p>
+            <p class="small mb-4">
+                De conformidad con lo previsto en el artículo 67.3 del Real Decreto - ley 24/2021, de 2 de noviembre, la
+                reproducción y utilización de las obras y otras prestaciones disponibles en este portal web mediante
+                técnicas de minería de textos y datos, u otros procedimientos automatizados de extracción de
+                información, está expresamente reservada en favor de Unidad Editorial Información Deportiva, S.L.U.
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center mb-4">
+                <a href="#" class="mx-2 small text-dark">Configuración de cookies</a>
+                <a href="#" class="mx-2 small text-dark">Política de privacidad</a>
+                <a href="#" class="mx-2 small text-dark">Términos y condiciones de uso</a>
+                <a href="#" class="mx-2 small text-dark">Política de minería de datos</a>
+                <a href="#" class="mx-2 small text-dark">Sección transparencia</a>
+                <a href="#" class="mx-2 small text-dark">Certificado por OJD</a>
+                <a href="#" class="mx-2 small text-dark">Contacto</a>
+                <a href="#" class="mx-2 small text-dark">Publicidad</a>
+                <a href="#" class="mx-2 small text-dark">Nuestro equipo</a>
+                <a href="#" class="mx-2 small text-dark">Venta de contenidos</a>
+                <a href="#" class="mx-2 small text-dark">Código ético</a>
+            </div>
+
+            <!-- Redes sociales -->
+            <p class="mb-2 font-weight-bold">Síguenos en</p>
+            <div class="d-flex justify-content-center">
+                <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-dark"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-twitter fa-2x text-dark"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-dark"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-tiktok fa-2x text-dark"></i></a>
+                <a href="#" class="mx-2"><i class="fab fa-youtube fa-2x text-dark"></i></a>
+                <a href="#" class="mx-2"><i class="fas fa-rss fa-2x text-dark"></i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CAMBIO: Script JS movido al final del body y modificado -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            var umbralScroll = $('#marcaBar').outerHeight(); // Altura de la barra superior como umbral
+            var botonesClonados = false; // Bandera para saber si los botones ya se clonaron
+
+            // Clonar los botones originales una vez al cargar la página
+            // Esto asegura que siempre tengamos una copia limpia para insertar
+            var originalBtnSuscribir = $('#btn-suscribir-top').clone(true);
+            var originalBtnIniciar = $('#btn-iniciar-top').clone(true);
+
+            $(window).scroll(function () {
+                var currentScroll = $(this).scrollTop();
+
+                if (currentScroll > umbralScroll) {
+                    // Cuando la barra superior desaparece
+                    $('#marcaBar').addClass('hidden'); // Oculta la barra superior
+                    $('#mainNavbar').addClass('scrolled'); // Cambia el color del navbar
+
+                    // Muestra los botones en el navbar si no se han mostrado ya
+                    if ($('#extraButtons').hasClass('hidden')) {
+                        $('#extraButtons').removeClass('hidden');
+                        // Limpiar el contenedor antes de añadir, por si acaso
+                        $('#extraButtons').empty();
+                        // Añadir los botones clonados
+                        $('#extraButtons').append(originalBtnSuscribir.clone(true));
+                        $('#extraButtons').append(originalBtnIniciar.clone(true));
+                    }
+
+                } else {
+                    // Cuando la barra superior está visible
+                    $('#marcaBar').removeClass('hidden'); // Muestra la barra superior
+                    $('#mainNavbar').removeClass('scrolled'); // Restaura el color del navbar
+
+                    // Oculta los botones del navbar
+                    if (!$('#extraButtons').hasClass('hidden')) {
+                        $('#extraButtons').addClass('hidden');
+                        $('#extraButtons').empty(); // Limpia los botones del navbar
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        window.addEventListener("scroll", function () {
+            let marcaBar = document.getElementById("marcaBar");  // tu barra superior
+            let navbarLogo = document.getElementById("navbarLogo");
+
+            if (marcaBar) {
+                // posición de la barra marca
+                let marcaBarBottom = marcaBar.getBoundingClientRect().bottom;
+
+                if (marcaBarBottom <= 0) {
+                    // cuando ya no se ve, mostramos el logo
+                    navbarLogo.classList.remove("d-none");
+                } else {
+                    // mientras se ve la barra, ocultamos el logo
+                    navbarLogo.classList.add("d-none");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
